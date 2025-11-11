@@ -128,14 +128,14 @@ SuiT successfully integrates superpixel tokens into the ViT backbone, enabling *
     * **Local Features**: A simple Conv Block (e.g., initial ResNet layer) extracts high-dimensional local features from the raw RGB space.
     * **Positional Features**: Due to the high granularity and dynamic nature of superpixel positions, SuiT employs a **parameter-efficient, learnable-frequency sinusoidal positional encoding** instead of fixed learned embeddings to efficiently encode complex spatial information.
 
-    ![Super-Pixel](asserts/3.5.2.JPG)
+    ![Super-Pixel](asserts/3.5.2.jpg)
 
 2.  **Superpixel-aware Aggregation**: Once the pixel-level embedding $F$ is ready, SuiT uses the superpixel index map $I$ to aggregate each superpixel $C_k$ into a fixed-dimension Token $z^{(k)}$:
     * **Dual Pooling**: To capture complementary information and remove size irregularities, SuiT concatenates the **Average Pooling** and **Max Pooling** of all pixel embeddings within $C_k$.
         * Average Pooling ($z_{avg}$): Captures the superpixel's overall feature.
         * Max Pooling ($z_{max}$): Captures the most salient feature within the superpixel.
 
-    ![Super-Pixel](asserts/3.5.1.JPG)
+    ![Super-Pixel](asserts/3.5.1.jpg)
     * **Superpixel Algorithm**: FastSLIC (a faster implementation of SLIC) is used with a compactness parameter of $10$, a maximum of $10$ iterations, and a configuration for a **maximum** of $196$ superpixels. **Crucially, the actual number of generated superpixels is dynamic and image-dependent.** (e.g., the average count on the ImageNet-1K validation set is $191.9 \pm 6.0$).
 
 ### [SPAM (arXiv:2509.12791)](https://arxiv.org/abs/2509.12791)
